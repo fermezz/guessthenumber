@@ -1,7 +1,10 @@
 from mock import patch
 
 from guessthenumber.constants import GAME_OVER_MESSAGE
-from guessthenumber.evaluator import Evaluator
+from guessthenumber.evaluator import (
+    Answer,
+    Evaluator,
+)
 from guessthenumber.game import Game
 from guessthenumber.thinker import Thinker
 
@@ -20,6 +23,15 @@ class TestGame:
         mocked_think_number.assert_called_once_with(cipher_quantity=4)
         mocked_ask_for_a_guess.assert_called_once()
         mocked_evaluate_guess.assert_called_once_with(1111, 1111)
+
+    @patch('builtins.input')
+    @patch('builtins.print')
+    def test_ask_for_a_guess(self, mocked_print, mocked_input):
+
+        game = Game()
+        game.ask_for_a_guess('Some message')
+        mocked_print.assert_called_once_with('Some message')
+        mocked_input.assert_called_once_with('Please, take a guess: ')
 
 
 class TestThinker:
@@ -75,3 +87,18 @@ class TestEvaluator:
         assert 0 == answer.rights
         assert 0 == answer.wrongs
         assert 4 == answer.present_but_wrong
+
+
+class TestAnswer:
+
+    def test_answer_str(self):
+        answer = Answer('1111', 3, 1, 0)
+        assert 'Rights: 3. Wrongs: 1. Present but wrong: 0.' == str(answer)
+
+    def test_answer_bool_false(self):
+        answer = Answer('1111', 3, 1, 0)
+        assert not bool(answer)
+
+    def test_answer_bool_true(self):
+        answer = Answer('1111', 4, 0, 0)
+        assert bool(answer)
