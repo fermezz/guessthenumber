@@ -2,8 +2,6 @@ class Evaluator:
 
     @classmethod
     def evaluate_guess(cls, guess, number):
-        guess = str(guess)
-        number = str(number)
 
         if guess == number:
             return Answer(number, len(number), 0, 0)
