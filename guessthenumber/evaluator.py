@@ -6,7 +6,7 @@ class Evaluator:
         number = str(number)
 
         if guess == number:
-            return Answer(len(number), 0, 0)
+            return Answer(number, len(number), 0, 0)
 
         rights = 0
         wrongs = 0
@@ -19,13 +19,14 @@ class Evaluator:
             else:
                 wrongs += 1
 
-        return Answer(rights, wrongs, present_but_wrong)
+        return Answer(number, rights, wrongs, present_but_wrong)
 
 
 
 class Answer:
 
-    def __init__(self, rights, wrongs, present_but_wrong):
+    def __init__(self, number, rights, wrongs, present_but_wrong):
+        self.number = number
         self.rights = rights
         self.wrongs = wrongs
         self.present_but_wrong = present_but_wrong
@@ -38,4 +39,4 @@ class Answer:
         )
 
     def __bool__(self):
-        return self.wrongs == 0 and self.present_but_wrong == 0
+        return len(self.number) == self.rights and self.wrongs == 0 and self.present_but_wrong == 0

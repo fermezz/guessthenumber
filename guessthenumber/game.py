@@ -25,9 +25,9 @@ class Game:
         if additional_message:
             print(additional_message)
 
-        return input("Please, take a guess: ")
+        return input('Please, take a guess: ')
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     game = Game()
     game.play()
