@@ -1,1 +1,1 @@
-GAME_OVER_MESSAGE = 'Game over! Hope you had fun :)'
+GAME_OVER_MESSAGE: str = 'Game over! Hope you had fun :)'

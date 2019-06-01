@@ -4,7 +4,10 @@ from abc import (
 )
 
 from guessthenumber.constants import GAME_OVER_MESSAGE
-from guessthenumber.evaluator import Evaluator
+from guessthenumber.evaluator import (
+    Answer,
+    Evaluator,
+)
 from guessthenumber.guesser import Guesser
 from guessthenumber.thinker import Thinker
 
@@ -12,19 +15,19 @@ from guessthenumber.thinker import Thinker
 class Game(ABC):
 
     @abstractmethod
-    def play(self, cipher_quantity=4, additional_message=None):
+    def play(self, cipher_quantity: int = 4, additional_message: str = None) -> None:
         raise NotImplementedError('Must implement a subclass.')
 
 
 class MachineGuessesHumanThinksGame(Game):
 
-    def play(self, cipher_quantity=4, additional_message=None):
+    def play(self, cipher_quantity: int = 4, additional_message: str = None) -> None:
 
-        guesser = Guesser(cipher_quantity)
-        hint = None
+        guesser: Guesser = Guesser(cipher_quantity)
+        hint: str = ''
 
         while True:
-            guess = guesser.take_a_guess(hint)
+            guess: str = guesser.take_a_guess(hint)
 
             if guess is None:
                 break
@@ -36,13 +39,14 @@ class MachineGuessesHumanThinksGame(Game):
 
 class HumanGuessesMachineThinksGame(Game):
 
-    def play(self, cipher_quantity=4, additional_message=None):
-        number = Thinker.think_number(cipher_quantity)
-        additional_message = None
+    # TODO: cipher_quantity is not used because at some point the machine
+    # should ask how many ciphers are going to be used to play.
+    def play(self, cipher_quantity: int = 4, additional_message: str = None) -> None:
+        number: str = Thinker.think_number(cipher_quantity=4)
 
         while True:
-            guess = str(self.ask_for_a_guess(additional_message))
-            answer = Evaluator.evaluate_guess(guess, number)
+            guess: str = self.ask_for_a_guess(additional_message)
+            answer: Answer = Evaluator.evaluate_guess(guess, number)
 
             if answer:
                 break
@@ -51,25 +55,23 @@ class HumanGuessesMachineThinksGame(Game):
 
         print(GAME_OVER_MESSAGE)
 
-
-    def ask_for_a_guess(self, additional_message=None):
+    @staticmethod
+    def ask_for_a_guess(additional_message: str = None) -> str:
         if additional_message:
             print(additional_message)
 
         return input('Please, take a guess: ')
 
 
-
-
 if __name__ == '__main__':
-    which_game = input(
+    which_game: str = input(
         'Hey there! There are two games to play here:\n\t'
         '1. Machine guesses, you think\n\t'
         '2. You guess, machine thinks\n'
         '-->  '
     )
     if int(which_game) == 1:
-        game = MachineGuessesHumanThinksGame()
+        game: Game = MachineGuessesHumanThinksGame()
     else:
         game = HumanGuessesMachineThinksGame()
 

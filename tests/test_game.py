@@ -24,7 +24,7 @@ class TestGames:
         game = HumanGuessesMachineThinksGame()
         game.play()
         mocked_print.assert_called_once_with(GAME_OVER_MESSAGE)
-        mocked_think_number.assert_called_once_with(4)
+        mocked_think_number.assert_called_once_with(cipher_quantity=4)
         mocked_ask_for_a_guess.assert_called_once()
         mocked_evaluate_guess.assert_called_once_with('1111', '1111')
 
@@ -47,7 +47,7 @@ class TestGames:
 
         mocked_input.assert_not_called
         mocked_print.assert_called_once_with(GAME_OVER_MESSAGE)
-        mocked_take_a_guess.assert_called_once_with(None)
+        mocked_take_a_guess.assert_called_once_with('')
 
 
 @patch('guessthenumber.common.random.randint', return_value=1)
@@ -124,7 +124,7 @@ class TestGuesser:
         guesser = Guesser(5)
 
         assert guesser.lower_guess == 0
-        assert guesser.current_guess == None
+        assert guesser.current_guess is None
         assert guesser.higher_guess == 99999
 
     def test_guesser_take_a_guess_no_hint(self):
