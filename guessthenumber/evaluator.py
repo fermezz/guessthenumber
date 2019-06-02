@@ -10,11 +10,7 @@ class Answer:
     present_but_wrong: int
 
     def __str__(self) -> str:
-        return 'Rights: {rights}. Wrongs: {wrongs}. Present but wrong: {present_but_wrong}.'.format(
-            rights=self.rights,
-            wrongs=self.wrongs,
-            present_but_wrong=self.present_but_wrong,
-        )
+        return f'Rights: {self.rights}. Wrongs: {self.wrongs}. Present but wrong: {self.present_but_wrong}.'
 
     def __bool__(self) -> bool:
         return len(self.number) == self.rights and self.wrongs == 0 and self.present_but_wrong == 0

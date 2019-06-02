@@ -32,7 +32,7 @@ class MachineGuessesHumanThinksGame(Game):
             if guess is None:
                 break
 
-            hint = input('My guess: {guess}. If not right, please give a hint:\n--> '.format(guess=guess))
+            hint = input(f'My guess: {guess}. If not right, please give a hint:\n--> ')
 
         print(GAME_OVER_MESSAGE)
 
