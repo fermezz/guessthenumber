@@ -10,7 +10,8 @@ There's actually two games here:
 
 # Play!
 ## Clone the repo
-`git clone https://github.com/fermezz/guessthenumber`
+`$ git clone https://github.com/fermezz/guessthenumber`
 
 ## Put it to work
-`python -m guessthenumber.game`
+1. `$ cd guessthenumber/python/`
+2. `python -m guessthenumber.game`
