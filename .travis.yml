@@ -11,7 +11,7 @@ matrix:
 
       script:
         - mypy python/
-        - pytest
+        - pytest --cov-report=xml --cov=python/guessthenumber/
 
       after_success:
         - coveralls
