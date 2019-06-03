@@ -47,7 +47,7 @@ class TestGames:
 
         mocked_input.assert_not_called
         mocked_print.assert_called_once_with(GAME_OVER_MESSAGE)
-        mocked_take_a_guess.assert_called_once_with('')
+        mocked_take_a_guess.assert_called_once_with(None)
 
 
 @patch('guessthenumber.common.random.randint', return_value=1)
@@ -124,14 +124,14 @@ class TestGuesser:
         guesser = Guesser(5)
 
         assert guesser.lower_guess == 0
-        assert guesser.current_guess is None
+        assert guesser.current_guess == 0
         assert guesser.higher_guess == 99999
 
     def test_guesser_take_a_guess_no_hint(self):
         guesser = Guesser(4)
         guess = guesser.take_a_guess()
 
-        assert guess == 9999 // 2
+        assert guess == str(9999 // 2)
 
     def test_guesser_take_a_guess_lower_hint(self):
         guesser = Guesser(4)
@@ -140,7 +140,7 @@ class TestGuesser:
         guess = guesser.take_a_guess('lower')
 
         assert guesser.higher_guess == 2222
-        assert guess == 3333 // 2
+        assert guess == str(3333 // 2)
 
     def test_guesser_take_a_guess_higher_hint(self):
         guesser = Guesser(4)
@@ -149,4 +149,4 @@ class TestGuesser:
         guess = guesser.take_a_guess('higher')
 
         assert guesser.lower_guess == 1111
-        assert guess == 3333 // 2
+        assert guess == str(3333 // 2)

@@ -1,15 +1,17 @@
-language: python
-sudo: required
-dist: xenial
-python:
-  - "3.7"
+matrix:
+  include:
+    - language: python
+      sudo: required
+      dist: xenial
+      python:
+        - "3.7"
 
-install:
-  - pip install -r requirements.txt
+      install:
+        - pip install -r python/requirements.txt
 
-script:
-  - mypy .
-  - pytest
+      script:
+        - mypy python/
+        - pytest
 
-after_success:
-  - coveralls
+      after_success:
+        - coveralls

@@ -2,6 +2,7 @@ from abc import (
     ABC,
     abstractmethod,
 )
+from typing import Optional
 
 from guessthenumber.constants import GAME_OVER_MESSAGE
 from guessthenumber.evaluator import (
@@ -24,10 +25,11 @@ class MachineGuessesHumanThinksGame(Game):
     def play(self, cipher_quantity: int = 4, additional_message: str = None) -> None:
 
         guesser: Guesser = Guesser(cipher_quantity)
-        hint: str = ''
+        hint: Optional[str] = None
 
+        # import pdbpp; pdbpp.set_trace()
         while True:
-            guess: str = guesser.take_a_guess(hint)
+            guess: Optional[str] = guesser.take_a_guess(hint)
 
             if guess is None:
                 break
@@ -64,15 +66,19 @@ class HumanGuessesMachineThinksGame(Game):
 
 
 if __name__ == '__main__':
-    which_game: str = input(
-        'Hey there! There are two games to play here:\n\t'
-        '1. Machine guesses, you think\n\t'
-        '2. You guess, machine thinks\n'
-        '-->  '
+    which_game: int = int(
+        input(
+            'Hey there! There are two games to play here:\n\t'
+            '1. Machine guesses, you think\n\t'
+            '2. You guess, machine thinks\n'
+            '-->  '
+        )
     )
-    if int(which_game) == 1:
+    if which_game == 1:
         game: Game = MachineGuessesHumanThinksGame()
-    else:
+    elif which_game == 2:
         game = HumanGuessesMachineThinksGame()
+    else:
+        print('Hmm, sorry! There\'s no such game.')
 
     game.play()
