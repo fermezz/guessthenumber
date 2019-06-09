@@ -1,0 +1,9 @@
+[package]
+name = "guessthenumber"
+version = "0.1.0"
+authors = ["Fernando Mez <fermezz@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+text_io = "0.1.7"
+rand = "0.6"
