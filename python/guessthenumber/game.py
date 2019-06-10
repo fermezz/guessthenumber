@@ -41,7 +41,7 @@ class MachineGuessesHumanThinksGame(Game):
 
 class HumanGuessesMachineThinksGame(Game):
 
-    # TODO: cipher_quantity is not used because at some point the machine
+    # TODO: cipher_quantity is not used but at some point the machine
     # should ask how many ciphers are going to be used to play.
     def play(self, cipher_quantity: int = 4, additional_message: str = None) -> None:
         number: str = Thinker.think_number(cipher_quantity=4)
