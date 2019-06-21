@@ -4,6 +4,8 @@ extern crate text_io;
 
 // Internal modules
 mod game;
+use game::Game;
+use game::HumanGuessesMachineThinksGame;
 
 const GAME_OVER_MESSAGE: &str = "Game over! Hope you had fun :)";
 
@@ -15,7 +17,8 @@ fn main() -> std::io::Result<()> {
 
     let _i: i32 = try_read!().expect("Must provide a number.");
 
-    game::play().unwrap();
+    let game: HumanGuessesMachineThinksGame = HumanGuessesMachineThinksGame{};
+    game.play().unwrap();
 
     println!("{}", GAME_OVER_MESSAGE);
     Ok(())

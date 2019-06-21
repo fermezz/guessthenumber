@@ -1,6 +1,6 @@
 extern crate rand;
 
-
+#[derive(Debug)]
 pub struct Answer {
     rights: u8,
     wrongs: u8,
@@ -8,14 +8,14 @@ pub struct Answer {
 }
 
 impl Answer {
-    pub fn is_correct(&self, guess: String) -> bool {
+    pub fn is_correct(&self, guess: &String) -> bool {
         self.rights == guess.len() as u8
         && self.wrongs == 0
         && self.present_but_wrong == 0
     }
 }
 
-pub fn evaluate_guess(guess: &str, number: String) -> Answer {
+pub fn evaluate_guess(guess: &str, number: &String) -> Answer {
     let mut rights: u8 = 0;
     let mut wrongs: u8 = 0;
     let mut present_but_wrong: u8 = 0;
